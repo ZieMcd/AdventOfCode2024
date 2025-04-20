@@ -17,11 +17,14 @@ func main() {
 
 	mp, _ := getInput()
 	marked := []Pos{}
+	start_pos := Pos{x: 0, y: 0}
 	for y, r := range mp {
 		for x, c := range r {
 			if c == '^' {
 				var total int
 				marked, total = followRoute(x, y, "UP", mp, marked, 0)
+				start_pos.x = x
+				start_pos.y = y
 				fmt.Println(total)
 			}
 		}
@@ -33,14 +36,22 @@ func main() {
 		// }
 	}
 
-	// for _, r := range marked {
-	// 	// route[r.y][r.x] = "#"
+	b := 0
+	for i, r := range marked {
+		if i != 0 {
+			mp[r.y][r.x] = '#'
+			if followRoutePart2(start_pos.x, start_pos.y, "UP", mp, []Pos{}, []string{}, 0) {
+				b++
+			}
 
-	// }
+			mp[r.y][r.x] = '.'
+		}
+	}
+	fmt.Println(b)
 
 }
 
-func followRoutePart2(x int, y int, dir string, route []string, marked []Pos, markedDir []string, total int) bool {
+func followRoutePart2(x int, y int, dir string, route [][]rune, marked []Pos, markedDir []string, total int) bool {
 
 	pos := Pos{x: x, y: y}
 	if !slices.Contains(marked, pos) {
