@@ -15,10 +15,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	// println(dayOne(lines))
 	println(dayTwo(lines))
-
 }
 
 // Super inefficient. T(N) = (O)N^2
@@ -73,12 +71,8 @@ func getInput() ([2][]int, error) {
 		nums := strings.Fields(scanner.Text())
 		num1, _ := strconv.Atoi(nums[0])
 		num2, _ := strconv.Atoi(nums[1])
-		// fmt.Printf("%d %d", num1, num2)
-		// fmt.Println()
 		result[0] = append(result[0], num1)
 		result[1] = append(result[1], num2)
-		// fmt.Printf("%v\n", result[1])
-		// fmt.Println()
 	}
 
 	return result, scanner.Err()

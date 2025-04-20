@@ -17,6 +17,7 @@ func partTwo() {
 	reports, _ := getInput()
 	fmt.Println(len(reports))
 	result := 0
+
 	for _, report := range reports {
 		isSafe := isReportValid(report, true)
 		fmt.Printf("report: %v, \n is valid: %t\n", report, isSafe)
