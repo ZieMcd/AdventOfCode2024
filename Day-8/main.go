@@ -24,30 +24,82 @@ func main() {
 					continue
 				}
 
-				var x int
-				var y int
-
-				if antenna.x > otherAntena.x {
-					x = otherAntena.x - (antenna.x - otherAntena.x)
-				} else if antenna.x < otherAntena.x {
-					x = otherAntena.x + (otherAntena.x - antenna.x)
-				} else {
-					x = antenna.x
-				}
-
-				if antenna.y > otherAntena.y {
-					y = otherAntena.y - (antenna.y - otherAntena.y)
-				} else if antenna.y < otherAntena.y {
-					y = otherAntena.y + (otherAntena.y - antenna.y)
-				} else {
-					y = antenna.y
-				}
-
-				if x < 0 || y < 0 || x >= w || y >= l {
-					continue
-				}
+				x := antenna.x
+				y := antenna.y
 
 				m[strconv.Itoa(x)+"-"+strconv.Itoa(y)] = true
+				difX := (antenna.x - otherAntena.x)
+				difY := (antenna.y - otherAntena.y)
+
+				if difX < 0 && difY < 0 {
+					for {
+						x = x + difX
+						y = y + difY
+						if x < 0 || y < 0 {
+							break
+						}
+						m[strconv.Itoa(x)+"-"+strconv.Itoa(y)] = true
+					}
+				}
+
+				if difX > 0 && difY > 0 {
+					for {
+						x = x + difX
+						y = y + difY
+						if x >= w || y >= l {
+							break
+						}
+						m[strconv.Itoa(x)+"-"+strconv.Itoa(y)] = true
+					}
+				}
+
+				if difX < 0 && difY > 0 {
+					for {
+						x = x + difX
+						y = y + difY
+						if x < 0 || y >= l {
+							break
+						}
+						m[strconv.Itoa(x)+"-"+strconv.Itoa(y)] = true
+					}
+				}
+
+				if difX > 0 && difY < 0 {
+					for {
+						x = x + difX
+						y = y + difY
+						if x >= w || y < 0 {
+							break
+						}
+						m[strconv.Itoa(x)+"-"+strconv.Itoa(y)] = true
+					}
+				}
+
+				// if
+
+				// if antenna.x > otherAntena.x {
+				// 	x = otherAntena.x - (antenna.x - otherAntena.x)
+				// 	difX = -(antenna.x - otherAntena.x)
+				// } else if antenna.x < otherAntena.x {
+				// 	x = otherAntena.x + (otherAntena.x - antenna.x)
+				// 	difX = (otherAntena.x - antenna.x)
+				// } else {
+				// 	x = antenna.x
+				// }
+
+				// if antenna.y > otherAntena.y {
+				// 	y = otherAntena.y - (antenna.y - otherAntena.y)
+				// } else if antenna.y < otherAntena.y {
+				// 	y = otherAntena.y + (otherAntena.y - antenna.y)
+				// } else {
+				// 	y = antenna.y
+				// }
+
+				// if x < 0 || y < 0 || x >= w || y >= l {
+				// 	continue
+				// }
+
+				// m[strconv.Itoa(x)+"-"+strconv.Itoa(y)] = true
 			}
 		}
 	}
